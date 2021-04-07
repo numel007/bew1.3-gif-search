@@ -6,6 +6,8 @@ const Tenor = require("tenorjs").client({
     "Filter":"high",
     "Locale":"en_US"
 });
+const http = require('http');
+const url = require('url');
 
 // App Setup
 const app=express();
@@ -15,10 +17,11 @@ const exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(express.static('public'));
 
 // Routes
 app.get('/', (req, res) => {
-    var term = ""
+    let term = ""
     if (req.query.term) {
         term = req.query.term
     }
